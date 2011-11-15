@@ -69,6 +69,11 @@ function widget($args, $instance) {
 	
 	// Widget title
 	echo $before_title;
+	
+	$icon = includes_url('images/rss.png');	
+	if( $instance["title_rss_icon"] )
+		echo '<a href="' . get_category_link($instance["cat"]) . 'feed" title="' . get_category_link($instance["cat"]) . ' RSS Feed"><img style="border:0;" width="14" height="14" src="'. $icon . '" alt="RSS" /></a>&nbsp;';
+
 	if( $instance["title_link"] )
 		echo '<a href="' . get_category_link($instance["cat"]) . '">' . $instance["title"] . '</a>';
 	else
@@ -99,7 +104,7 @@ function widget($args, $instance) {
 			<?php endif; ?>
 
 			<?php if ( $instance['date'] ) : ?>
-			<p class="post-date"><?php the_time("j M Y"); ?></p>
+			<p style="font-size:90%" class="post-date"><?php the_time("j M Y"); ?></p>
 			<?php endif; ?>
 			
 			<?php if ( $instance['excerpt'] ) : ?>
@@ -199,6 +204,13 @@ function form($instance) {
 			<label for="<?php echo $this->get_field_id("title_link"); ?>">
 				<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id("title_link"); ?>" name="<?php echo $this->get_field_name("title_link"); ?>"<?php checked( (bool) $instance["title_link"], true ); ?> />
 				<?php _e( 'Make widget title link' ); ?>
+			</label>
+		</p>
+		
+		<p>
+			<label for="<?php echo $this->get_field_id("title_rss_icon"); ?>">
+				<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id("title_rss_icon"); ?>" name="<?php echo $this->get_field_name("title_rss_icon"); ?>"<?php checked( (bool) $instance["title_rss_icon"], true ); ?> />
+				<?php _e( 'Show RSS icon in title' ); ?>
 			</label>
 		</p>
 		
